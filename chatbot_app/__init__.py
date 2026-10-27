@@ -1,0 +1,1 @@
+"""Django customer-service application."""

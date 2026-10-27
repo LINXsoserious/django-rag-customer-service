@@ -1,0 +1,7 @@
+# Fictional support hours / 虚构客服时间
+
+NovaShop support hours are Monday through Friday, 09:00 to 18:00. The demonstration mailbox is support@example.invalid; it is not a working contact address.
+NovaShop 客服时间为周一至周五09:00至18:00。演示邮箱 support@example.invalid 并非真实服务地址。
+
+Chat history is stored only in this local application database. Contact extraction is opt-in and does not send email, SMS, or phone calls.
+聊天记录仅保存在当前应用数据库中。联系方式提取需要主动勾选，不会发送邮件、短信或拨打电话。

@@ -1,0 +1,7 @@
+# Fictional NovaShop shipping policy / 虚构 NovaShop 配送规则
+
+Standard NovaShop delivery takes 3 to 5 business days after dispatch. Tracking is available after the parcel is handed to the courier.
+NovaShop 标准配送在发货后需要3至5个工作日。包裹交给承运商后才会生成物流记录。
+
+For a delayed shipment, check the tracking reference first. This demo does not connect to a carrier or look up real orders.
+如遇配送延误，请先查看物流单号。本演示不连接承运商，也不查询真实订单。

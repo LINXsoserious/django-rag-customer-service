@@ -1,0 +1,40 @@
+name: rag-checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      DJANGO_SECRET_KEY: ci-only-placeholder-not-for-deployment-0000000000
+      RAG_BACKEND: demo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev,vector,api]"
+      - run: python scripts/check_publication.py
+      - run: python manage.py check
+      - run: python manage.py makemigrations --check --dry-run
+      - run: python -m pytest -q
+      - run: python manage.py migrate --noinput
+      - run: python manage.py build_index --backend demo
+      - run: python -m examples.manual_rag --question "returns policy"
+      - run: python -m build
+      - run: python scripts/check_wheel.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rag-${{ matrix.os }}
+          path: dist/*

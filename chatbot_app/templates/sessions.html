@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}会话记录 · RAG Workbench{% endblock %}
+{% block page_name %}sessions{% endblock %}
+{% block sessions_active %}active{% endblock %}
+{% block content %}
+<header class="page-header"><div><div class="eyebrow" data-i18n="sessionsEyebrow">YOUR WORKSPACE / 会话档案</div><h1 data-i18n="sessionsTitle">继续上一次的对话。</h1><p data-i18n="sessionsSubtitle">只显示当前浏览器拥有的记录；可恢复、导出或删除。</p></div><a class="button button-primary" href="/"><span aria-hidden="true">＋</span><span data-i18n="newChat">新建会话</span></a></header>
+<div class="history-summary"><div><span class="section-number">01</span><h2 data-i18n="allSessions">全部会话</h2><span id="history-count" class="count-badge">0</span></div><button id="refresh-sessions" class="button button-quiet" type="button" data-i18n="refresh">刷新列表</button></div>
+<div id="sessions-alert" class="alert" role="alert" hidden></div>
+<div id="sessions-loading" class="loading-state" role="status"><span class="thinking-dot" aria-hidden="true"></span><span data-i18n="loadingSessions">正在加载你的会话…</span></div>
+<div id="sessions-empty" class="history-empty" hidden><span class="empty-glyph" aria-hidden="true">▤</span><h2 data-i18n="noSessionsTitle">这里还没有会话</h2><p data-i18n="noSessionsDescription">完成第一次问答后，记录会自动保存在本地数据库中。</p><a class="button button-primary" href="/" data-i18n="startConversation">开始问答</a></div>
+<div id="sessions-list" class="sessions-list"></div>
+<p class="history-footnote" data-i18n="historyFootnote">导出文件含消息与来源片段。删除会话也会删除其本地线索和反馈；清除浏览器 cookie 后可能无法再次访问旧会话。</p>
+{% endblock %}
+{% block scripts %}<script>{% include "partials/sessions.js" %}</script>{% endblock %}

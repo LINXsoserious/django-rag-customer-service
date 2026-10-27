@@ -1,0 +1,7 @@
+# Fictional NovaShop returns policy / 虚构 NovaShop 退货规则
+
+NovaShop accepts returns within 14 days after delivery. The item must be unused and include its original packaging. This is a fictional demonstration policy.
+NovaShop 支持签收后14天内申请退货。商品须未使用并保留原包装。本规则仅为虚构演示样例。
+
+To request a return, provide the order reference through the support form. Do not include payment credentials or identity documents in chat.
+申请退货时请通过客服表单提供订单编号，不要在聊天中填写支付凭据或身份证件。

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block page_name %}chat{% endblock %}
+{% block chat_active %}active{% endblock %}
+{% block content %}
+<header class="page-header"><div><div class="eyebrow" data-i18n="chatEyebrow">CUSTOMER SUPPORT / 知识检索</div><h1 data-i18n="chatTitle">答案，从依据开始。</h1><p data-i18n="chatSubtitle">检索本地知识文档，逐条查看回答背后的原文。</p></div><button id="new-chat" class="button button-secondary" type="button"><span aria-hidden="true">＋</span><span data-i18n="newChat">新建会话</span></button></header>
+<div id="mode-banner" class="mode-banner" role="status"><span id="mode-badge" class="mode-badge">LOCAL DEMO</span><div><strong id="mode-title" data-i18n="demoTitle">本地检索摘录，未调用 LLM</strong><p id="mode-description" data-i18n="demoDescription">无需 API key。回答来自本地文档片段，不是模型生成。</p></div><span class="banner-decoration" aria-hidden="true">↳</span></div>
+<div class="chat-grid">
+  <section class="conversation-panel" aria-label="对话" data-i18n-aria="conversation">
+    <div class="panel-heading"><div><span class="section-number">01</span><h2 data-i18n="conversation">对话</h2></div><span id="session-label" class="subtle-label" data-i18n="unsavedSession">尚未开始</span></div>
+    <div id="conversation-scroll" class="conversation-scroll">
+      <div id="empty-state" class="empty-state"><span class="empty-glyph" aria-hidden="true">?</span><h3 data-i18n="emptyTitle">先问一个具体问题</h3><p data-i18n="emptyDescription">试试虚构客服知识库中的配送、退换货与客服时间问题。</p><div class="suggestions"><button type="button" class="suggestion" data-prompt="shipping"><span data-i18n="shippingPrompt">订单一般多久发货？</span><span aria-hidden="true">↗</span></button><button type="button" class="suggestion" data-prompt="returns"><span data-i18n="returnsPrompt">如何申请退货？</span><span aria-hidden="true">↗</span></button><button type="button" class="suggestion" data-prompt="support"><span data-i18n="supportPrompt">客服什么时候在线？</span><span aria-hidden="true">↗</span></button></div></div>
+      <div id="messages" class="messages" aria-live="polite" aria-relevant="additions"></div>
+      <div id="pending" class="pending-message" hidden><span class="thinking-dot" aria-hidden="true"></span><span data-i18n="thinking">正在检索知识文档…</span></div>
+    </div>
+    <div id="chat-alert" class="alert" role="alert" hidden></div>
+    <form id="chat-form" class="composer"><label class="sr-only" for="message" data-i18n="messageLabel">输入问题</label><div class="composer-input"><textarea id="message" name="message" rows="3" maxlength="{{ max_question_chars|default:4000 }}" placeholder="输入你的客服问题…" data-i18n-placeholder="messagePlaceholder" required></textarea><button id="send-message" class="send-button" type="submit" disabled><span data-i18n="send">发送</span><span aria-hidden="true">↑</span></button></div><div class="composer-footer"><label class="contact-opt-in"><input id="store-contact" type="checkbox"><span data-i18n="contactConsent">允许将本条消息中的联系方式另存为本地线索</span></label><span class="keyboard-hint" data-i18n="keyboardHint">Enter 发送 · Shift+Enter 换行</span></div><p id="privacy-note" class="privacy-note" data-i18n="contactPrivacy">默认不提取联系方式；本应用不会主动外发线索或联系你。</p></form>
+  </section>
+  <aside class="evidence-panel" aria-label="来源证据" data-i18n-aria="evidence"><div class="panel-heading"><div><span class="section-number">02</span><h2 data-i18n="evidence">来源证据</h2></div><span id="source-count" class="count-badge">0</span></div><p class="evidence-intro" data-i18n="evidenceIntro">原始相对路径、字符范围和检索分数，保留可核查的上下文。</p><div id="retrieval-query-wrap" class="query-detail" hidden><span data-i18n="retrievalQuery">检索问题</span><p id="retrieval-query"></p></div><div id="evidence-content" class="evidence-content"><div class="evidence-empty"><span aria-hidden="true">⌕</span><h3 data-i18n="evidenceEmptyTitle">证据会显示在这里</h3><p data-i18n="evidenceEmptyDescription">发送问题后查看命中的文档片段。无匹配时会明确说明。</p></div></div><div class="evidence-footer"><span class="status-dot" aria-hidden="true"></span><span data-i18n="evidenceFooter">切换语言不会改写文档原文</span></div></aside>
+</div>
+{% endblock %}
+{% block scripts %}<script>{% include "partials/chat.js" %}</script>{% endblock %}

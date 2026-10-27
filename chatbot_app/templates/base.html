@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>{% block title %}客服知识台 · RAG Workbench{% endblock %}</title>
+  <style>{% include "partials/styles.html" %}</style>
+</head>
+<body data-page="{% block page_name %}chat{% endblock %}" data-backend="{{ backend|default:'demo' }}" data-max-question-chars="{{ max_question_chars|default:4000 }}">
+  <a class="skip-link" href="#main-content" data-i18n="skip">跳转到主要内容</a>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="Workspace navigation" data-i18n-aria="navigation">
+      <a class="brand" href="/" aria-label="RAG Workbench">
+        <span class="brand-mark" aria-hidden="true">R<span>·</span></span>
+        <span><strong data-i18n="brand">客服知识台</strong><small>RAG WORKBENCH</small></span>
+      </a>
+      <div class="sidebar-label" data-i18n="workspace">工作空间</div>
+      <nav class="navigation">
+        <a href="/" class="nav-item {% block chat_active %}{% endblock %}"><span aria-hidden="true">◌</span><span data-i18n="chatNav">知识问答</span><span class="nav-arrow" aria-hidden="true">↗</span></a>
+        <a href="/sessions/" class="nav-item {% block sessions_active %}{% endblock %}"><span aria-hidden="true">▤</span><span data-i18n="sessionsNav">会话记录</span><span class="nav-arrow" aria-hidden="true">↗</span></a>
+      </nav>
+      <div class="sidebar-note"><span class="status-dot" aria-hidden="true"></span><span data-i18n="ownedSessions">记录归当前浏览器所有</span></div>
+      <div class="sidebar-bottom">
+        <div class="language-control"><label for="language" data-i18n="language">界面语言</label><select id="language" aria-label="界面语言"><option value="zh">简体中文</option><option value="en">English</option></select></div>
+        <div class="product-note"><span data-i18n="productNote">本地知识 · 来源可查</span><small>RAG Workbench · v{{ app_version|default:'0.1.0' }}</small></div>
+      </div>
+    </aside>
+    <main id="main-content" class="main-content" tabindex="-1">{% block content %}{% endblock %}</main>
+  </div>
+  <form hidden aria-hidden="true">{% csrf_token %}</form>
+  <script>{% include "partials/common.js" %}</script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

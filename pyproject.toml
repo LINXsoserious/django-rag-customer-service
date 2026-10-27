@@ -1,0 +1,27 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "django-rag-customer-service"
+version = "0.1.0"
+description = "Django RAG customer service with source citations, owned sessions, and a keyless local demo"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["Django>=5.2,<5.3", "python-dotenv>=1.0,<2"]
+
+[project.optional-dependencies]
+vector = ["faiss-cpu>=1.8,<2", "numpy>=1.26,<3"]
+api = ["langchain-openai>=0.3,<2"]
+dev = ["pytest>=8,<10", "pytest-django>=4.9,<5", "build>=1,<2", "hatchling>=1.25,<2"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["rag_core", "chatbot_app", "chatbot_project"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"data/sample_docs" = "rag_core/sample_docs"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "chatbot_project.settings"
+testpaths = ["tests"]
+pythonpath = ["."]
